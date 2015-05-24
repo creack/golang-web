@@ -1,0 +1,6 @@
+FROM            scratch
+ENTRYPOINT      ["/gotest"]
+EXPOSE          80
+COPY            tpl /tpl
+COPY            static /static
+ADD             .release /

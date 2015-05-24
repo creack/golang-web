@@ -1,0 +1,28 @@
+web:
+  image: creack/golang-web
+  ports:
+    - "80"
+  target_num_containers: 2
+  deployment_strategy: high_availability
+  autoredeploy: true
+
+datadog-agent:
+  image: datadog/docker-dd-agent
+  privileged: true
+  deployment_strategy: every_node
+  environment:
+    - API_KEY=xxxxxxxxx
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /proc/mounts:/host/proc/mounts:ro
+    - /sys/fs/cgroup:/host/fs/cgroup:ro
+
+haproxy:
+  image: tutum/haproxy
+  roles:
+    - global
+  links:
+    - web
+  ports:
+    - 80:80
+    - 443:443

@@ -1,0 +1,7 @@
+.gitignore
+.git
+.dockerignore
+Dockerfile
+Dockerfile.release
+Makefile
+.docker_id
